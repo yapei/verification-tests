@@ -125,7 +125,9 @@ require_relative 'chrome_extension'
         # This is actually a shortcut for trace logging
         # this also needs debug webdriver logging enabled above to work
         # options.log_level = 'trace'
-
+        if self.class.container?
+          options.add_argument('--disable-dev-shm-usage')
+        end
         @browser = Watir::Browser.new :firefox, :http_client=>client, desired_capabilities: caps, options: options
         if @size
           browser.window.resize_to(*@size)
