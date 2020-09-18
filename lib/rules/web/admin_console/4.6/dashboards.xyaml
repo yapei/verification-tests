@@ -155,15 +155,14 @@ check_resources_workloads_dashboard:
   action: change_workload
   action: check_table_loaded
   action: check_chart_loaded
-  action: check_no_errors_in_charts
+  action: click_dashboard_dropdown
 check_resources_pod_dashboard:
   params:
     dropdown_menu_item: Kubernetes / Compute Resources / Pod
   action: click_dashboard_dropdown
   action: click_dropdown_menu_item
-  action: change_namespace
   action: check_table_loaded
-  action: check_chart_loaded  
+  action: check_line_chart_loaded  
 # cluster dashboards
 check_cluster_utilization_items:
   elements:
