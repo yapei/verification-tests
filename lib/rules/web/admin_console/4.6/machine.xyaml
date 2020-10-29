@@ -25,3 +25,28 @@ delete_machineset_from_action:
     item: Delete Machine Set
   action: click_one_dropdown_action
   action: submit_changes
+open_health_status:
+  element:
+    selector:
+      xpath: //button[.,='Health Checks']
+    op: click
+check_health_status:
+  action: open_health_status
+  action: check_machine_health_check_item
+  element:
+    selector:
+      xpath: //div[contains(text(),'Ready')]//div[contains(.,'<ready_status>')]
+  action:
+    if_param:
+      ready_status: Failing
+    ref: check_failing_message
+check_failing_message:
+  element:
+    selector:
+      xpath: //div[contains(@class,'pf-c-alert__description') and contains(.,'One or more health check remediation conditions have been met')]
+check_machine_health_check_item:
+  params:
+    resource_type: MachineHealthCheck
+    resource_name: <mhc_name>
+    resource_link: /k8s/ns/openshift-machine-api/machine.openshift.io~v1beta1~MachineHealthCheck/<mhc_name>
+  action: check_resource_item
