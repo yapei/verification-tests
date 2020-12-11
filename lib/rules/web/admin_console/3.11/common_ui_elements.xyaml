@@ -50,6 +50,7 @@ check_page_match:
   element:
     selector:
       visible_text: !ruby/regexp /<content>/i
+    timeout: 20
 submit_changes:
   element:
     selector:
