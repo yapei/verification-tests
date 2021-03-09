@@ -155,12 +155,12 @@ require_relative 'chrome_extension'
       elsif @browser_type == :safari
         logger.info "Launching Safari"
         raise "auth proxy not implemented for Safari" if proxy_pass
-        safari_caps[:accept_insecure_certs] = true
+        #safari_caps[:accept_insecure_certs] = true
         if Integer === @scroll_strategy
           safari_caps[:element_scroll_behavior] = @scroll_strategy
         end
-        driver = Selenium::WebDriver.for :safari, desired_capabilities: safari_caps, url: @selenium_url
-        @browser = Watir::Browser.new driver
+        #Selenium::WebDriver::Safari::Service#driver_path
+        @browser = Watir::Browser.new :safari, desired_capabilities: safari_caps, url: @selenium_url, technology_preview: true
       else
         raise "Web4Cucumber: browser type '#{@browser_type}' not supported"
       end
