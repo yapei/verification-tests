@@ -1,6 +1,13 @@
+#!/usr/bin/env ruby
+lib_path = File.expand_path(File.join(File.dirname(__FILE__), '..', '..','lib'))
+unless $LOAD_PATH.any? {|p| File.expand_path(p) == lib_path}
+  $LOAD_PATH.unshift(lib_path)
+end
+
 require 'base64'
 require 'fileutils'
 require 'tmpdir' # Dir.tmpdir
+require 'log' # BushSlicer::Logger
 
 module BushSlicer
   class SaveToDirEmbeddingFormatter
@@ -9,7 +16,6 @@ module BushSlicer
 
     def initialize(config)
       path = config.out_stream
-
       if ENV['WORKSPACE'] && File.directory?(ENV['WORKSPACE'])
         # in jenkins it would be nice to have formatter log in WORKSPACE
         basedir = ENV['WORKSPACE']
@@ -43,6 +49,7 @@ module BushSlicer
 
     # @see CucuFormatter
     def embed(src, mime_type, label)
+      puts "yapei debugging CucuFormatter embed"
       if (File.file?(src) rescue false)
         FileUtils.cp src target_dir
         return

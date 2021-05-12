@@ -73,6 +73,7 @@ module BushSlicer
       else
         @level = INFO
       end
+      @label
     end
 
     def dedup_start
@@ -177,6 +178,14 @@ module BushSlicer
           warn "Embedding request for #{mime_type} data labeled #{label} of unrecognized type: #{src.inspect}"
         end
       end
+    end
+    # store label
+    def label=(label)
+      @label = label
+    end
+    # get label
+    def label
+      return @label
     end
 
     def reset_dedup
