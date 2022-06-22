@@ -112,8 +112,8 @@ require_relative 'chrome_extension'
       client.open_timeout = 180
       client.read_timeout = 600
       headless
-      # Selenium::WebDriver.logger.level = :debug
-      # Watir.logger.level = :debug
+      Selenium::WebDriver.logger.level = :debug
+      Watir.logger.level = :debug
       if @browser_type == :firefox
         logger.info "Launching Firefox Marionette/Geckodriver"
         raise "auth proxy not implemented for Firefox" if proxy_pass
@@ -201,7 +201,7 @@ require_relative 'chrome_extension'
     end
 
     def finalize
-      @browser.close if @browser && @browser.exists?
+      @browser.quit if @browser && @browser.exists?
       # avoid destroy as it happens at_exit anyway but often reused during run
       # @@headless.destroy if @@headless
     end
